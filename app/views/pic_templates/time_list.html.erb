@@ -32,8 +32,8 @@
       <%= pluralize(pic.likes_count, "like") %>
     </td>
 
-    <td>
-      Show details
+    <td> 
+    <a href="/photos/<%= pic.id %>">Show details</a>
     </td>
   </tr>
   <% end %>

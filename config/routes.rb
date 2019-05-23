@@ -16,6 +16,14 @@ Rails.application.routes.draw do
   match("/users/:id/feed", { :controller => "users", :action => "feed", :via => "get" })
 
   match("/users/:id/discover", { :controller => "users", :action => "discover", :via => "get" })
+  
+  match("/delete_photo/:id_to_delete", { :controller => "pictures", :action => "byyyeee", :via => "get" })
+  
+  match("/new_photo_form", { :controller => "pictures", :action => "blank_form", :via => "get" })
+
+  match("/create_photo_record", { :controller => "pictures", :action => "save_new_row", :via => "get" })
+  
+  match("/existing_photo_form/:id_to_edit", { :controller => "pictures", :action => "edit_photo", :via => "get" })
 
 
   # The routes below are for the ActiveAdmin dashboard located at /admin. You can ignore them.
