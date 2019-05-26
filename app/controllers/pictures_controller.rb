@@ -43,8 +43,20 @@ class PicturesController < ApplicationController
     redirect_to("/recent")
   end
   
-  def edit_photo
+  def filled_form
+    pic_id = params.fetch("id_to_prefill")
+    @picture = Photo.where({ :id => pic_id }).at(0)
     
+    render("pic_templates/edit_photo.html.erb")
+  end
+  
+  def save_old_row
+    old_photo = Photo.where({ :id => :id_to_update })
+    old_photo.caption = params.fetch("pic_caption")
+    old_photo.image = params.fetch("pic_image")
+    old_photo.save
+    
+    redirect_to("/photos/" + params.fetch("id_to_update"))
   end
   
 end

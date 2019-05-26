@@ -26,9 +26,26 @@
     <%= @pic.fans.pluck(:username).to_sentence %>
   </dd>
   
+  <dt>Add a fan</dt>
+  <dd>
+    <form action="create_like_record">
+      <input type="hidden" value="<%= @pic.id %>" name="picture_id">
+      <label for="fan_dropdown">Person</label>
+      <select id="fan_dropdown" name="person_id">
+        <% User.all.order({ :username => :asc }).each do |a_user| %>
+            <option value="<%= a_user.id %>">
+            <%= a_user.username %>
+            </option>
+        <% end %>
+      </select>
+
+      <button>Add fan</button>
+    </form>
+  </dd>
+  
   <dt>Danger Zone</dt>
   <dd>
-    <a href="/edit_photo/<%= @pic.id %>">Edit this photo</a>
+    <a href="/existing_photo_form/<%= @pic.id %>">Edit this photo</a>
   </dd>
   <dd>
     <a href="/delete_photo/<%= @pic.id %>">Delete this photo</a>
@@ -58,3 +75,22 @@
   </tr>
   <% end %>
 </table>
+
+<h3>Add a new comment</h3>
+<form action="/create_comment_record">
+  <input type="hidden" value="635" name="picture_id">
+
+  <label for="author_dropdown">Commenter</label>
+  <select id="author_dropdown" name="commenter_id" >
+    <% User.all.order({ :username => :asc }).each do |a_user| %>
+        <option value="<%= a_user.id %>">
+        <%= a_user.username %>
+        </option>
+    <% end %>
+    </select>
+    
+  <label for="comment_box">Comment</label>
+  <textarea id="comment_box" name="comment_text" placeholder="Enter a comment..."></textarea>
+
+  <button>Add comment</button>
+</form>
